@@ -15,4 +15,4 @@ This portfolio website implements all five required JavaScript features:
    - The Dark Mode/Light Mode preference is saved using localStorage so that the selected theme is remembered after the page is refreshed.
 
 5. Click-to-Reveal Banner
-   - Clicking the hero banner image reveals additional information about Dr. Joyce Muthama using classList.toggle().
+   - Clicking the hero banner image reveals additional information about Dr. Joyce Muthama using classList.toggle() 
