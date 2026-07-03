@@ -38,6 +38,12 @@ const serviceDescriptionInput = document.getElementById("serviceDescriptionInput
 const addServiceBtn = document.getElementById("addServiceBtn");
 const serviceFormMessage = document.getElementById("serviceFormMessage");
 
+function setFeedback(element, text, type) {
+    element.textContent = text;
+    element.classList.remove("feedback-error", "feedback-success");
+    element.classList.add(type === "error" ? "feedback-error" : "feedback-success");
+}
+
 function renderServices() {
     servicesContainer.innerHTML = "";
 
@@ -78,9 +84,13 @@ addServiceBtn.addEventListener("click", () => {
     const icon = serviceIconInput.value.trim() || "🩺";
     const description = serviceDescriptionInput.value.trim();
 
-    if (name === "" || description === "") {
-        serviceFormMessage.textContent = "Please fill in service name and description.";
-        serviceFormMessage.style.color = "#c0392b";
+    if (name.length < 3) {
+        setFeedback(serviceFormMessage, "Service name must be at least 3 characters.", "error");
+        return;
+    }
+
+    if (description.length < 10) {
+        setFeedback(serviceFormMessage, "Description must be at least 10 characters.", "error");
         return;
     }
 
@@ -91,8 +101,7 @@ addServiceBtn.addEventListener("click", () => {
     serviceIconInput.value = "";
     serviceDescriptionInput.value = "";
 
-    serviceFormMessage.textContent = "Service added successfully.";
-    serviceFormMessage.style.color = "green";
+    setFeedback(serviceFormMessage, "Service added successfully.", "success");
 });
 
 renderServices();
@@ -127,21 +136,36 @@ addQuestionBtn.addEventListener("click", () => {
 })
 const appointmentForm = document.getElementById("appointmentForm");
 const formMessage = document.getElementById("formMessage");
+const patientName = document.getElementById("patientName");
+const patientEmail = document.getElementById("patientEmail");
+const patientPhone = document.getElementById("patientPhone");
+const patientMessage = document.getElementById("patientMessage");
+
+function clearInputErrorState() {
+    patientName.classList.remove("input-error");
+    patientEmail.classList.remove("input-error");
+    patientPhone.classList.remove("input-error");
+    patientMessage.classList.remove("input-error");
+}
 
 appointmentForm.addEventListener("submit", function(event){
 
     event.preventDefault();
+    clearInputErrorState();
 
-    const name = document.getElementById("patientName").value.trim();
-    const email = document.getElementById("patientEmail").value.trim();
-    const phone = document.getElementById("patientPhone").value.trim();
-    const message = document.getElementById("patientMessage").value.trim();
+    const name = patientName.value.trim();
+    const email = patientEmail.value.trim();
+    const phone = patientPhone.value.trim();
+    const message = patientMessage.value.trim();
 
     if(name === "" || email === "" || phone === "" || message === ""){
 
-        formMessage.textContent = "Please complete all the fields.";
+        if (name === "") patientName.classList.add("input-error");
+        if (email === "") patientEmail.classList.add("input-error");
+        if (phone === "") patientPhone.classList.add("input-error");
+        if (message === "") patientMessage.classList.add("input-error");
 
-        formMessage.style.color = "#c0392b";
+        setFeedback(formMessage, "Please complete all the fields.", "error");
 
         return;
 
@@ -151,22 +175,42 @@ appointmentForm.addEventListener("submit", function(event){
 
     if(!emailPattern.test(email)){
 
-        formMessage.textContent = "Please enter a valid email address.";
+        patientEmail.classList.add("input-error");
 
-        formMessage.style.color = "#c0392b";
+        setFeedback(formMessage, "Please enter a valid email address.", "error");
 
         return;
 
     }
 
-    formMessage.textContent =
-    "✓ Appointment request submitted successfully! Our clinic will contact you shortly.";
+    const phonePattern = /^[0-9+\-\s]{10,15}$/;
 
-    formMessage.style.color = "green";
+    if(!phonePattern.test(phone)){
+
+        patientPhone.classList.add("input-error");
+
+        setFeedback(formMessage, "Please enter a valid phone number.", "error");
+
+        return;
+
+    }
+
+    setFeedback(
+        formMessage,
+        "Appointment request submitted successfully. Our clinic will contact you shortly.",
+        "success"
+    );
 
     appointmentForm.reset();
+    clearInputErrorState();
 
 })
+
+[patientName, patientEmail, patientPhone, patientMessage].forEach((input) => {
+    input.addEventListener("input", () => {
+        input.classList.remove("input-error");
+    });
+});
 const themeToggle = document.getElementById("themeToggle");
 
 if(localStorage.getItem("theme") === "dark"){
@@ -240,12 +284,4 @@ topBtn.onclick = function(){
 
     });
 }
-const topBtn = document.getElementById("topBtn");
-
-topBtn.addEventListener("click", () => {
-    window.scrollTo({
-        top: 0,
-        behavior: "smooth"
-    });
-});
 
