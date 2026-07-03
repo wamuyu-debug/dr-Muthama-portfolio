@@ -258,6 +258,8 @@ appointmentForm.addEventListener("submit", function(event){
     });
 });
 const themeToggle = document.getElementById("themeToggle");
+const revealBannerBtn = document.getElementById("revealBannerBtn");
+const promoBanner = document.getElementById("promoBanner");
 
 if(localStorage.getItem("theme") === "dark"){
 
@@ -286,6 +288,20 @@ themeToggle.addEventListener("click", ()=>{
     }
 
 })
+
+if (revealBannerBtn && promoBanner) {
+    revealBannerBtn.addEventListener("click", () => {
+        promoBanner.classList.toggle("show-banner");
+        promoBanner.classList.toggle("hidden-banner");
+
+        if (promoBanner.classList.contains("show-banner")) {
+            revealBannerBtn.textContent = "Hide Today's Banner";
+        } else {
+            revealBannerBtn.textContent = "Click to Reveal Today's Banner";
+        }
+    });
+}
+
 const learnMoreBtn = document.getElementById("learnMoreBtn");
 const doctorInfo = document.getElementById("doctorInfo");
 
