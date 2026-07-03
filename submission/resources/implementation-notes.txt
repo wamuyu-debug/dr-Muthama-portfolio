@@ -1,0 +1,18 @@
+IMPLEMENTATION NOTES
+
+This portfolio website implements all five required JavaScript features:
+
+1. Loop-rendered Dynamic Content
+   - Medical services are stored in a JavaScript array of objects and dynamically rendered to the page using forEach().
+
+2. Dynamically Add & Remove Elements
+   - Users can add health questions to a list. Each question is created dynamically and includes a Remove button to delete it.
+
+3. Form Handling with Validation
+   - The appointment request form uses JavaScript validation with event.preventDefault(). Input is validated and feedback messages are displayed to the user.
+
+4. Persistent State with localStorage
+   - The Dark Mode/Light Mode preference is saved using localStorage so that the selected theme is remembered after the page is refreshed.
+
+5. Click-to-Reveal Banner
+   - Clicking the hero banner image reveals additional information about Dr. Joyce Muthama using classList.toggle().
