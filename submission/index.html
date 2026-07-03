@@ -10,6 +10,29 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;700;800&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
 </head>
 <body>
+    <nav class="navbar">
+
+    <div class="logo">
+        Dr. Joyce Muthama
+    </div>
+
+    <ul class="nav-links">
+
+        <li><a href="#">Home</a></li>
+
+        <li><a href="#about">About</a></li>
+
+        <li><a href="#services">Services</a></li>
+
+        <li><a href="#questions">Questions</a></li>
+
+        <li><a href="#appointment">Appointment</a></li>
+
+        <li><a href="#contact">Contact</a></li>
+
+    </ul>
+
+</nav>
 
     <!-- HERO -->
 
@@ -17,28 +40,40 @@
 
         <div class="hero-text">
 
-            <h1>DR. JOYCE<br>MUTHAMA</h1>
+    <p class="tagline">Trusted Women's Healthcare</p>
 
-            <p class="subtitle">
-                Consultant Gynecologist & Obstetrician
-            </p>
+    <h1>DR. JOYCE<br>MUTHAMA</h1>
 
-            <p class="hero-description">
-                Dedicated to providing compassionate, patient-centered
-                healthcare for women through every stage of life.
-            </p>
+    <p class="subtitle">
+        Consultant Gynecologist & Obstetrician
+    </p>
 
-        </div>
+    <p class="hero-description">
+        Dedicated to providing compassionate,
+        evidence-based healthcare for women through
+        every stage of life—from adolescence to
+        motherhood and beyond.
+    </p>
+    <button id="themeToggle" class="theme-btn">
+    🌙 Dark Mode
+</button>
+
+
+    <div class="hero-buttons">
+        <a href="#contact" class="btn-primary">Book Appointment</a>
+        <a href="#services" class="btn-secondary">Explore Services</a>
+    </div>
+
+</div>
 
         <div class="hero-image">
             <img src="images/image1.jpeg" alt="Dr Joyce Muthama">
         </div>
-
     </section>
 
     <!-- ABOUT -->
 
-    <section class="about">
+    <section class="about" id="about">
 
         <div class="about-image">
             <img src="images/image2.jpeg" alt="">
@@ -144,6 +179,110 @@
 
     </div>
 
+    <section id="services">
+    <h2>Medical Services</h2>
+    <div id="services-list"></div>
+</section>
+
+</section>
+<section id="questions">
+
+    <h2>Questions Before Your Visit</h2>
+
+    <p class="questions-subtitle">
+        Write down any questions you'd like to discuss during your consultation.
+    </p>
+
+    <div class="question-input">
+
+        <input
+            type="text"
+            id="questionInput"
+            placeholder="e.g. Should I bring my previous medical reports?">
+
+        <button id="addQuestionBtn">
+            Add Question
+        </button>
+
+    </div>
+
+    <ul id="questionList"></ul>
+
+</section>
+<section id="appointment">
+
+    <h2>Book an Appointment</h2>
+
+    <p class="appointment-subtitle">
+        Complete the form below and our clinic will contact you to confirm your appointment.
+    </p>
+
+    <form id="appointmentForm">
+
+        <input
+            type="text"
+            id="patientName"
+            placeholder="Full Name">
+
+        <input
+            type="email"
+            id="patientEmail"
+            placeholder="Email Address">
+
+        <input
+            type="tel"
+            id="patientPhone"
+            placeholder="Phone Number">
+
+        <textarea
+            id="patientMessage"
+            placeholder="Reason for your visit"></textarea>
+
+        <button type="submit">
+            Request Appointment
+        </button>
+
+    </form>
+
+    <p id="formMessage"></p>
+
+</section>
+<section id="why-choose">
+
+    <h2>Why Choose Dr. Muthama?</h2>
+
+    <p>
+        Discover what makes her approach to women's healthcare trusted by so many patients.
+    </p>
+
+    <button id="learnMoreBtn">
+        Learn More About Dr. Muthama
+    </button>
+
+    <div id="doctorInfo" class="hidden">
+
+        <div class="info-card">
+            <h3>👩‍⚕️ 15+ Years Experience</h3>
+            <p>Providing compassionate and evidence-based healthcare to women.</p>
+        </div>
+
+        <div class="info-card">
+            <h3>🤱 Personalized Care</h3>
+            <p>Every patient receives individual attention and treatment plans.</p>
+        </div>
+
+        <div class="info-card">
+            <h3>🏥 Modern Women's Healthcare</h3>
+            <p>Committed to preventive medicine and high-quality reproductive care.</p>
+        </div>
+
+        <div class="info-card">
+            <h3>❤️ Trusted by Families</h3>
+            <p>Helping women through adolescence, pregnancy and menopause.</p>
+        </div>
+
+    </div>
+
 </section>
     <!-- EXPERIENCE -->
 
@@ -157,10 +296,52 @@
         </p>
 
     </section>
+    <section id="testimonials">
+
+    <h2>What Our Patients Say</h2>
+
+    <div class="testimonial-container">
+
+        <div class="testimonial-card">
+            <p>
+                "Dr. Joyce made me feel comfortable throughout my pregnancy.
+                She explained every step with patience and professionalism."
+            </p>
+
+            <h4>— Sarah K.</h4>
+
+            <span>⭐⭐⭐⭐⭐</span>
+        </div>
+
+        <div class="testimonial-card">
+            <p>
+                "Excellent care from the first consultation to delivery.
+                I always felt listened to and supported."
+            </p>
+
+            <h4>— Mercy W.</h4>
+
+            <span>⭐⭐⭐⭐⭐</span>
+        </div>
+
+        <div class="testimonial-card">
+            <p>
+                "Womenwellklinic provides a warm and welcoming environment.
+                Highly recommended!"
+            </p>
+
+            <h4>— Anne N.</h4>
+
+            <span>⭐⭐⭐⭐⭐</span>
+        </div>
+
+    </div>
+
+</section>
 
     <!-- CONTACT -->
 
-    <section class="contact">
+    <section class="contact" id="contact">
 
         <h2>Get In Touch</h2>
 
@@ -189,6 +370,6 @@
         </div>
 
     </section>
-
+<script src="js/script.js"></script>
 </body>
 </html>
