@@ -32,22 +32,70 @@ const services = [
 ];
 
 const servicesContainer = document.getElementById("services-list");
+const serviceNameInput = document.getElementById("serviceNameInput");
+const serviceIconInput = document.getElementById("serviceIconInput");
+const serviceDescriptionInput = document.getElementById("serviceDescriptionInput");
+const addServiceBtn = document.getElementById("addServiceBtn");
+const serviceFormMessage = document.getElementById("serviceFormMessage");
 
-services.forEach(service => {
+function renderServices() {
+    servicesContainer.innerHTML = "";
 
-    const card = document.createElement("div");
+    services.forEach((service, index) => {
+        const card = document.createElement("div");
+        card.classList.add("service-card");
 
-    card.classList.add("service-card");
+        card.innerHTML = `
+            <button class="remove-service-btn" data-index="${index}" type="button">Remove</button>
+            <div class="service-icon">${service.icon}</div>
+            <h3>${service.name}</h3>
+            <p>${service.description}</p>
+        `;
 
-    card.innerHTML = `
-        <div class="service-icon">${service.icon}</div>
-        <h3>${service.name}</h3>
-        <p>${service.description}</p>
-    `;
+        servicesContainer.appendChild(card);
+    });
+}
 
-    servicesContainer.appendChild(card);
+servicesContainer.addEventListener("click", (event) => {
+    const removeBtn = event.target.closest(".remove-service-btn");
 
-})
+    if (!removeBtn) {
+        return;
+    }
+
+    const index = Number(removeBtn.dataset.index);
+
+    if (Number.isNaN(index)) {
+        return;
+    }
+
+    services.splice(index, 1);
+    renderServices();
+});
+
+addServiceBtn.addEventListener("click", () => {
+    const name = serviceNameInput.value.trim();
+    const icon = serviceIconInput.value.trim() || "🩺";
+    const description = serviceDescriptionInput.value.trim();
+
+    if (name === "" || description === "") {
+        serviceFormMessage.textContent = "Please fill in service name and description.";
+        serviceFormMessage.style.color = "#c0392b";
+        return;
+    }
+
+    services.push({ name, icon, description });
+    renderServices();
+
+    serviceNameInput.value = "";
+    serviceIconInput.value = "";
+    serviceDescriptionInput.value = "";
+
+    serviceFormMessage.textContent = "Service added successfully.";
+    serviceFormMessage.style.color = "green";
+});
+
+renderServices();
 const questionInput = document.getElementById("questionInput");
 const addQuestionBtn = document.getElementById("addQuestionBtn");
 const questionList = document.getElementById("questionList");
