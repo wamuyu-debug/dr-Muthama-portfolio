@@ -1,4 +1,4 @@
-const services = [
+const defaultServices = [
     {
         name: "Antenatal Care",
         icon: "🤰",
@@ -31,6 +31,40 @@ const services = [
     }
 ];
 
+const SERVICES_STORAGE_KEY = "womenwell_services";
+
+function loadServices() {
+    const savedServices = localStorage.getItem(SERVICES_STORAGE_KEY);
+
+    if (!savedServices) {
+        return [...defaultServices];
+    }
+
+    try {
+        const parsed = JSON.parse(savedServices);
+
+        if (!Array.isArray(parsed)) {
+            return [...defaultServices];
+        }
+
+        const isValid = parsed.every((service) => (
+            typeof service.name === "string" &&
+            typeof service.icon === "string" &&
+            typeof service.description === "string"
+        ));
+
+        return isValid ? parsed : [...defaultServices];
+    } catch (error) {
+        return [...defaultServices];
+    }
+}
+
+let services = loadServices();
+
+function saveServices() {
+    localStorage.setItem(SERVICES_STORAGE_KEY, JSON.stringify(services));
+}
+
 const servicesContainer = document.getElementById("services-list");
 const serviceNameInput = document.getElementById("serviceNameInput");
 const serviceIconInput = document.getElementById("serviceIconInput");
@@ -46,6 +80,16 @@ function setFeedback(element, text, type) {
 
 function renderServices() {
     servicesContainer.innerHTML = "";
+
+    if (services.length === 0) {
+        servicesContainer.innerHTML = `
+            <div class="service-card">
+                <h3>No services yet</h3>
+                <p>Add a service using the form below.</p>
+            </div>
+        `;
+        return;
+    }
 
     services.forEach((service, index) => {
         const card = document.createElement("div");
@@ -76,6 +120,7 @@ servicesContainer.addEventListener("click", (event) => {
     }
 
     services.splice(index, 1);
+    saveServices();
     renderServices();
 });
 
@@ -95,6 +140,7 @@ addServiceBtn.addEventListener("click", () => {
     }
 
     services.push({ name, icon, description });
+    saveServices();
     renderServices();
 
     serviceNameInput.value = "";
